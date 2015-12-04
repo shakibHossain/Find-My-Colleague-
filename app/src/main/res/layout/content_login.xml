@@ -38,7 +38,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/content_registration_username"
+                android:id="@+id/content_login_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -54,7 +54,7 @@
             android:layout_marginTop="4dp">
 
             <EditText
-                android:id="@+id/content_registration_pin"
+                android:id="@+id/content_login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -69,10 +69,33 @@
 
         <Button
             android:id="@+id/loginButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_gravity="center"
             android:text="Login"
+            android:background="#006699"
+            android:textColor="#FFFFFF"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Haven't registered yet?"
+            android:gravity="center"
+            android:layout_marginTop="30dp"
+            android:textSize="20sp"/>
+
+        <Button
+            android:id="@+id/login_registerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="Register"
+            android:onClick="goToRegistration"
+            android:background="#006699"
+            android:textColor="#FFFFFF"
             />
 
     </LinearLayout>

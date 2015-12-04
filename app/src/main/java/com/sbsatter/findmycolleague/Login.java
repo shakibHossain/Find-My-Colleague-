@@ -2,13 +2,11 @@ package com.sbsatter.findmycolleague;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -18,6 +16,11 @@ public class Login extends AppCompatActivity {
 
     @Bind(R.id.loginButton)Button loginButton;
 
+    private EditText username;
+    private EditText password;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,27 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        username=(EditText) findViewById(R.id.content_login_username);
+        password=(EditText) findViewById(R.id.content_login_password);
+
+        username.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+
+                }
+            }
+        });
+
+        password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+
+                }
+            }
+        });
 
         ButterKnife.bind(this);
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -54,4 +78,9 @@ public class Login extends AppCompatActivity {
     }
 
 
+    public void goToRegistration(View view) {
+        Intent i=new Intent(Login.this,Registration.class);
+        startActivity(i);
+        finish();
+    }
 }

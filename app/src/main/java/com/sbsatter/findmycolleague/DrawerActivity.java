@@ -1,5 +1,6 @@
 package com.sbsatter.findmycolleague;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -93,17 +94,25 @@ public class DrawerActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            Intent i=new Intent(DrawerActivity.this,EditProfile.class);
+            startActivity(i);
         } else if (id == R.id.nav_gallery) {
+            Intent i=new Intent(DrawerActivity.this,Status.class);
+            startActivity(i);
 
         } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            Intent i=new Intent(DrawerActivity.this,Login.class);
+            startActivity(i);
+            finish();
         }
+        //else if (id == R.id.nav_manage) {
+
+       // }
+     //     else if (id == R.id.nav_share) {
+
+     //   } else if (id == R.id.nav_send) {
+
+      //  }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

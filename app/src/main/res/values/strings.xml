@@ -14,5 +14,11 @@
         <item>By Program</item>
         <item>By Branch</item>
     </string-array>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="title_activity_edit_profile">EditProfile</string>
+    <string name="title_activity_status">Status</string>
+    <string name="inOffice">In Office</string>
+    <string name="inAMeeting">In a meeting</string>
+    <string name="outOfOffice">Out of office</string>
 
 </resources>

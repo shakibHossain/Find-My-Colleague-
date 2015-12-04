@@ -38,7 +38,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/content_registration_username"
+                android:id="@+id/content_login_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -54,7 +54,7 @@
             android:layout_marginTop="4dp">
 
             <EditText
-                android:id="@+id/content_registration_pin"
+                android:id="@+id/content_login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
@@ -110,7 +110,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Register" />
+            android:text="Register"
+            android:background="#006699"
+            android:textColor="#FFFFFF"
+            android:onClick="register"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -125,6 +128,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:background="#006699"
+            android:textColor="#FFFFFF"
             android:text="Login"
             />
 
