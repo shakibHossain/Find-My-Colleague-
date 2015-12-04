@@ -5,4 +5,14 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="title_activity_registration">Registration</string>
+    <string name="title_activity_login">Login</string>
+    <string-array name="spinner_options">
+        <item>By Name</item>
+        <item>By Pin</item>
+        <item>By Program</item>
+        <item>By Branch</item>
+    </string-array>
+
 </resources>
