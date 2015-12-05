@@ -1,8 +1,8 @@
 package com.sbsatter.findmycolleague;
 
-import android.support.v4.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 
 /**
  * Created by user pc on 12/4/2015.
@@ -21,26 +20,39 @@ import java.util.List;
 public class EmployeeInformation extends Fragment {
     private ArrayAdapter<String> mForecastAdapter;
 
+    ArrayList<HashMap<String,String>> list= new ArrayList<>();
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Add this line in order for this fragment to handle menu events.
         setHasOptionsMenu(true);
+        list=DrawerActivity.detail;
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        ArrayList<String> names= new ArrayList<>();
+        if(list.get(0).get("Type").toString().equals("Employee")){
+            for(int i=1; i<list.size(); i++){
+                names.add(list.get(i).get("Name").toString());
+            }
+        }else {
+            for(int i=1; i<list.size(); i++) {
+                names.add(list.get(i).get("Program").toString());
+            }
+        }
 
+//        String[] data = {
+//                "Mon 6/23 - Sunny - 31/17",
+//                "Tue 6/24 - Foggy - 21/8",
+//                "Wed 6/25 - Cloudy - 22/17",
+//                "Thurs 6/26 - Rainy - 18/11",
+//                "Fri 6/27 - Foggy - 21/10",
+//                "Sat 6/28 - TRAPPED IN WEATHERSTATION - 23/18",
+//                "Sun 6/29 - Sunny - 20/7"};
+//        List<String> weekForecast = new ArrayList<String>(Arrays.asList(data));
 
-        String[] data = {
-                "Mon 6/23 - Sunny - 31/17",
-                "Tue 6/24 - Foggy - 21/8",
-                "Wed 6/25 - Cloudy - 22/17",
-                "Thurs 6/26 - Rainy - 18/11",
-                "Fri 6/27 - Foggy - 21/10",
-                "Sat 6/28 - TRAPPED IN WEATHERSTATION - 23/18",
-                "Sun 6/29 - Sunny - 20/7"};
-        List<String> weekForecast = new ArrayList<String>(Arrays.asList(data));
 
         // Now that we have some dummy forecast data, create an ArrayAdapter.
         // The ArrayAdapter will take data from a source (like our dummy forecast) and
@@ -51,7 +63,7 @@ public class EmployeeInformation extends Fragment {
                 R.id.list_item_forecast_textview, // The ID of the textview to populate.
                 //        weekForecast);
                 //     new ArrayList<String>());
-                weekForecast);
+                names);
 
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
@@ -66,7 +78,7 @@ public class EmployeeInformation extends Fragment {
                 Toast.makeText(getActivity(), "position " + position, Toast.LENGTH_SHORT).show();
                 //Intent intent = new Intent(getActivity(), DetailActivity.class).putExtra(Intent.EXTRA_TEXT, forecast);
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
-                    startActivity(intent);
+                startActivity(intent);
             }
         });
 

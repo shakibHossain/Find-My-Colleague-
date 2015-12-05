@@ -19,7 +19,7 @@ import butterknife.OnClick;
 public class Registration extends AppCompatActivity {
 
     @Bind(R.id.loginButton)Button loginButton;
-
+    @Bind(R.id.registerButton)Button registerButton;
  //   private Button loginButton;
     private CheckBox showPassword;
     private EditText username;
@@ -34,7 +34,7 @@ public class Registration extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-ButterKnife.bind(this);
+        ButterKnife.bind(this);
      //   loginButton=(Button) findViewById(R.id.loginButton);
         showPassword=(CheckBox) findViewById(R.id.content_registration_showPasswordCheckbox);
         password=(EditText) findViewById(R.id.content_registration_password);
@@ -61,6 +61,8 @@ ButterKnife.bind(this);
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
 
+                }else{
+                    yourEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 }
             }
         });
@@ -75,24 +77,24 @@ ButterKnife.bind(this);
         });
 
 
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(pin.length()!=8){
+                    Toast.makeText(Registration.this, "Invalid PIN, must be 8 digits", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (password.getText().toString().equals(confirmPassword.getText().toString())) {
+                } else {
+                    Toast.makeText(Registration.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                    password.setText("");
+                    confirmPassword.setText("");
+                }
+            }
+        });
 
 
-       confirmPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-           @Override
-           public void onFocusChange(View v, boolean hasFocus) {
-               if (!hasFocus) {
-                   // code to execute when EditText loses focus
-                   if(password.getText().toString().equals( confirmPassword.getText().toString())){
 
-                   }
-                   else{
-                       Toast.makeText(Registration.this,"Passwords do not match",Toast.LENGTH_SHORT).show();
-                       password.setText("");
-                       confirmPassword.setText("");
-                   }
-               }
-           }
-       });
 
 //        username.addTextChangedListener(new TextWatcher() {
 //            @Override
