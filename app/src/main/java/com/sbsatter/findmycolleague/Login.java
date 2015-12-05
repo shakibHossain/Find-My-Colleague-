@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -51,13 +52,14 @@ public class Login extends AppCompatActivity {
         });
 
         ButterKnife.bind(this);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Login.this, DrawerActivity.class);
-                startActivity(i);
-            }
-        });
+//        loginButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent i = new Intent(Login.this, DrawerActivity.class);
+////                startActivity(i);
+//
+//            }
+//        });
 
 
 
@@ -74,7 +76,12 @@ public class Login extends AppCompatActivity {
     @OnClick(R.id.loginButton)
     public void submit(){
         Intent i = new Intent(Login.this, DrawerActivity.class);
-        startActivity(i);
+//        startActivity(i);
+        SOAPQueryClass soapqc= new SOAPQueryClass(Login.this);
+        if(soapqc.validateNameAndID(username.getText().toString(),password.getText()
+                .toString())){
+            Toast.makeText(Login.this, "Login Successful", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
