@@ -36,6 +36,7 @@ public class Status extends AppCompatActivity {
             case R.id.radio_inOffice:
                 if (checked)
                     // Pirates are the best
+
                     break;
             case R.id.radio_inAMeeting:
                 if (checked)
@@ -47,4 +48,7 @@ public class Status extends AppCompatActivity {
                     break;
         }
     }
+
+
+
 }

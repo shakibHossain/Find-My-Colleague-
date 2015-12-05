@@ -38,7 +38,7 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/content_login_username"
+                android:id="@+id/content_registration_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
@@ -54,7 +54,7 @@
             android:layout_marginTop="4dp">
 
             <EditText
-                android:id="@+id/content_login_password"
+                android:id="@+id/content_registration_pin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"

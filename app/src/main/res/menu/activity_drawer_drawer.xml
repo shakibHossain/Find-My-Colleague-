@@ -14,6 +14,11 @@
             android:id="@+id/nav_slideshow"
 
             android:title="Log out"/>
+
+        <item
+            android:id="@+id/nav_getPrograms"
+
+            android:title="Get All Programs"/>
         <!-- <item
              android:id="@+id/nav_manage"
              android:icon="@drawable/ic_menu_manage"

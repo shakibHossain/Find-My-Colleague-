@@ -12,7 +12,7 @@
         <item>By Name</item>
         <item>By Pin</item>
         <item>By Program</item>
-        <item>By Branch</item>
+        <item>By Program ID</item>
     </string-array>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_edit_profile">EditProfile</string>
@@ -20,5 +20,10 @@
     <string name="inOffice">In Office</string>
     <string name="inAMeeting">In a meeting</string>
     <string name="outOfOffice">Out of office</string>
+    <string name="pref_user_pin">savedpin</string>
+    <string name="pref_user_password">savedpassword</string>
+    <string name="pref_user_username">savedusername</string>
+
+
 
 </resources>

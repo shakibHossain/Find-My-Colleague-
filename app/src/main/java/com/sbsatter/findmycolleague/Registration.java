@@ -1,7 +1,9 @@
 package com.sbsatter.findmycolleague;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputType;
@@ -38,9 +40,11 @@ public class Registration extends AppCompatActivity {
      //   loginButton=(Button) findViewById(R.id.loginButton);
         showPassword=(CheckBox) findViewById(R.id.content_registration_showPasswordCheckbox);
         password=(EditText) findViewById(R.id.content_registration_password);
-        username=(EditText) findViewById(R.id.content_login_username);
-        pin=(EditText) findViewById(R.id.content_login_password);
+        username=(EditText) findViewById(R.id.content_registration_username);
+        pin=(EditText) findViewById(R.id.content_registration_pin);
         confirmPassword=(EditText) findViewById(R.id.content_registration_confirmPassword);
+        yourEditText=(EditText)findViewById(R.id.content_registration_pin);
+
 
 //        username.addTextChangedListener(new GenericTextWatcher(username));
 //        pin.addTextChangedListener(new GenericTextWatcher(pin));
@@ -162,6 +166,13 @@ public class Registration extends AppCompatActivity {
 
     public void register(View view) {
         if(password.getText().toString().equals( confirmPassword.getText().toString())){
+            SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor;
+            editor=prefs.edit();
+            editor.putString(getString(R.string.pref_user_username),username.getText().toString());
+            editor.commit();
+          //  (new saveInDatabase(this)).execute(pin.getText().toString(),password.getText().toString(),"Inactive","0.000","0.000");
+
 
         }
         else{

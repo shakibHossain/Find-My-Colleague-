@@ -3,8 +3,10 @@ package com.sbsatter.findmycolleague;
 import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -32,6 +35,7 @@ import org.ksoap2.serialization.SoapObject;
 import org.ksoap2.serialization.SoapPrimitive;
 import org.ksoap2.serialization.SoapSerializationEnvelope;
 import org.ksoap2.transport.HttpTransportSE;
+import org.w3c.dom.Text;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
@@ -55,7 +59,6 @@ public class DrawerActivity extends AppCompatActivity
     HashMap<String, String> staffInfoByName, staffInfoByPin, getAllPrograms;
     String searchString="";
     int selectedItemSpinner=2;
-
     View viewToChange;
 
 
@@ -109,6 +112,9 @@ public class DrawerActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+   //     TextView t=(TextView)findViewById(R.id.nav_head_text);
+        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
+        String nav_head_user=(prefs.getString(getString(R.string.pref_user_username),"user"));
 
 
 
@@ -164,10 +170,20 @@ public class DrawerActivity extends AppCompatActivity
             startActivity(i);
 
         } else if (id == R.id.nav_slideshow) {
+            SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.remove(getString(R.string.pref_user_pin));
+            editor.remove(getString(R.string.pref_user_password));
+            editor.apply();
             Intent i = new Intent(DrawerActivity.this, Login.class);
             startActivity(i);
             finish();
+        } else if (id == R.id.nav_getPrograms) {
+
+
         }
+
+
         //else if (id == R.id.nav_manage) {
 
         // }

@@ -1,10 +1,13 @@
 package com.sbsatter.findmycolleague;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 
 public class SplashScreen extends AppCompatActivity {
     // Splash screen timer
@@ -15,6 +18,7 @@ public class SplashScreen extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
     //    getActionBar().setIcon(new ColorDrawable(getResources().getColor(android.R.color.transparent)));
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -37,7 +41,13 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 // This method will be executed once the timer is over
                 // Start your app main activity
-                Intent i = new Intent(SplashScreen.this, Registration.class);
+                Intent i;
+                if(getLoginDetails()) {
+                    i = new Intent(SplashScreen.this, DrawerActivity.class);
+                }
+                else{
+                    i = new Intent(SplashScreen.this, Login.class);
+                }
                 startActivity(i);
 
                 // close this activity
@@ -45,6 +55,17 @@ public class SplashScreen extends AppCompatActivity {
             }
         }, SPLASH_TIME_OUT);
     }
+
+    private boolean getLoginDetails() {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        String pin = prefs.getString(getString(R.string.pref_user_pin), "`");
+        String password = prefs.getString(getString(R.string.pref_user_password), "`");
+        Log.v("Splash screen", pin+" "+password);
+        if(pin=="`" || password=="`"){
+            return false;
+        }
+        return true;
     }
+}
 
 
