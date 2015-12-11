@@ -1,11 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#e3e3e3"
-    android:orientation="vertical"
-    android:padding="@dimen/activity_horizontal_margin"
-    tools:context=".LoginActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#e3e3e3"
+              android:orientation="vertical"
+              android:padding="@dimen/activity_horizontal_margin"
+              tools:context=".LoginActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -38,27 +38,42 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/content_login_username"
+                android:id="@+id/content_registration_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
                 android:hint="Enter Name"
                 android:gravity="center"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
-            android:id="@+id/pinWrapper"
+            android:id="@+id/userNameWrapperTIL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/usernameWrapper"
             android:layout_marginTop="4dp">
 
             <EditText
-                android:id="@+id/content_login_password"
+                android:id="@+id/content_registration_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:hint="Enter 8 digit Pin"
+                android:hint="Enter username"
+                android:gravity="center"/>
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/mobileWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/usernameWrapper"
+            android:layout_marginTop="4dp">
+
+            <EditText
+                android:id="@+id/content_registration_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="Mobile"
                 android:gravity="center"/>
 
         </android.support.design.widget.TextInputLayout>
@@ -70,13 +85,13 @@
             android:layout_below="@id/usernameWrapper"
             android:layout_marginTop="4dp">
 
-        <EditText
-            android:id="@+id/content_registration_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:hint="Enter Password"
-            android:gravity="center"/>
+            <EditText
+                android:id="@+id/content_registration_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:hint="Enter Password"
+                android:gravity="center"/>
 
         </android.support.design.widget.TextInputLayout>
 
@@ -110,10 +125,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Register"
+
             android:background="#006699"
             android:textColor="#FFFFFF"
-            android:onClick="register"/>
+            android:text="Register"/>
 
         <TextView
             android:layout_width="match_parent"

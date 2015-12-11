@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FindMyColleague</string>
+    <string name="app_name">Find My Colleague</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -11,8 +11,6 @@
     <string-array name="spinner_options">
         <item>By Name</item>
         <item>By Pin</item>
-        <item>By Program</item>
-        <item>By Branch</item>
     </string-array>
     <string name="title_activity_detail">DetailActivity</string>
     <string name="title_activity_edit_profile">EditProfile</string>
@@ -20,5 +18,9 @@
     <string name="inOffice">In Office</string>
     <string name="inAMeeting">In a meeting</string>
     <string name="outOfOffice">Out of office</string>
+    <string name="pref_loggedIn_username">savedusername</string>
+    <string name="pref_loggedIn_password">savedpassword</string>
+    <string name="pref_loggedIn_name">savedname</string>
+
 
 </resources>

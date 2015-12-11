@@ -2,19 +2,74 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:fitsSystemWindows="true"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.sbsatter.findmycolleague.Status">
 
-    <android.support.design.widget.AppBarLayout android:layout_height="wrap_content"
-        android:layout_width="match_parent" android:theme="@style/AppTheme.AppBarOverlay">
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
-        <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
-            android:layout_width="match_parent" android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary" app:popupTheme="@style/AppTheme.PopupOverlay" />
+
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_status" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RadioGroup
+            android:id="@+id/radioGroup_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/radio_inAMeeting"
+                android:text="In a Meeting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton
+                android:text="In Office"
+                android:id="@+id/radio_inOffice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton
+                android:text="Out of Office"
+                android:id="@+id/radio_outOfOffice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"/>
+            <RadioButton
+                android:text="Custom message"
+                android:id="@+id/radio_customMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"/>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_customMsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <EditText
+                    android:layout_width="320dp"
+                    android:id="@+id/til_customMsgET"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter your custom message here"
+                    android:gravity="center"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:text="SET"
+                    android:textColor="#fff"
+                    android:id="@+id/til_customMsgBtn"
+                    android:background="#e91f74"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"/>
+            </android.support.design.widget.TextInputLayout>
+
+        </RadioGroup>
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

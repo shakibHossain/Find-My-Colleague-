@@ -29,7 +29,7 @@ public class EditProfile extends AppCompatActivity {
         designation=(EditText) findViewById(R.id.content_edit_designation);
         extension=(EditText) findViewById(R.id.content_edit_extension);
         phone=(EditText) findViewById(R.id.content_edit_phone);
-        status=(EditText) findViewById(R.id.content_edit_status);
+       // status=(EditText) findViewById(R.id.content_edit_status);
 
 
 

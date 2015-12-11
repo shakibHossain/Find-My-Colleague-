@@ -3,8 +3,10 @@ package com.sbsatter.findmycolleague;
 import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -22,6 +24,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -45,17 +48,12 @@ public class DrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private Spinner spinner;
-    protected static final String SOAP_ACTION = "http://dss.brac.net/GetAllProjects";
-    protected static final String METHOD_NAME = "GetAllProjects";
-    private static final String NAMESPACE = "http://dss.brac.net/";
-    private static final String URL = "http://dss.brac.net/bracstandingdata/Service.asmx";
     protected static SoapSerializationEnvelope soapEnvelop;
     public static ArrayList<HashMap<String,String>> detail;
     ProgressDialog progressDialog;
-    HashMap<String, String> staffInfoByName, staffInfoByPin, getAllPrograms;
+    HashMap<String, String> staffInfoByName, staffInfoByPin, getStaffByProgram;
     String searchString="";
-    int selectedItemSpinner=2;
-
+    int selectedItemSpinner=0;
     View viewToChange;
 
 
@@ -109,6 +107,14 @@ public class DrawerActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        TextView t=(TextView)findViewById(R.id.nav_head_text);
+        try{
+            t.setText("");
+        }catch (Exception e){
+            Log.i("TAG",""+e);
+        }
+        SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
+        String nav_head_user=(prefs.getString(getString(R.string.pref_loggedIn_name),"user"));
 
 
 
@@ -116,7 +122,10 @@ public class DrawerActivity extends AppCompatActivity
     }
 
 
-
+    public void editProfile(){
+        Intent i = new Intent(DrawerActivity.this, EditProfile.class);
+        startActivity(i);
+    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -155,19 +164,31 @@ public class DrawerActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.edit_profile) {
             // Handle the camera action
             Intent i = new Intent(DrawerActivity.this, EditProfile.class);
             startActivity(i);
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.set_status) {
             Intent i = new Intent(DrawerActivity.this, Status.class);
             startActivity(i);
 
-        } else if (id == R.id.nav_slideshow) {
+        } else if (id == R.id.log_out) {
+            SharedPreferences prefs= PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.remove(getString(R.string.pref_loggedIn_name));
+            editor.remove(getString(R.string.pref_loggedIn_username));
+            editor.remove(getString(R.string.pref_loggedIn_password));
+            editor.apply();
             Intent i = new Intent(DrawerActivity.this, Login.class);
             startActivity(i);
             finish();
+        } else if (id == R.id.view_programs) {
+            Intent i = new Intent(DrawerActivity.this, AllProgramsActivity.class);
+            startActivity(i);
+
         }
+
+
         //else if (id == R.id.nav_manage) {
 
         // }
@@ -205,8 +226,9 @@ public class DrawerActivity extends AppCompatActivity
             soapRequestHandler = new SOAPRequestHandler(SOAPRequestHandler
                     .StaffInfoByPIN, searchCriteria);
         }else{
+            searchCriteria.put("Program_ID", searchString);
             soapRequestHandler = new SOAPRequestHandler(SOAPRequestHandler
-                    .GetAllPrograms);
+                    .GetStaffByProgram, searchCriteria);
         }
         progressDialog= new ProgressDialog(this);
         progressDialog.setIndeterminate(false);
@@ -222,14 +244,14 @@ public class DrawerActivity extends AppCompatActivity
         fragmentManager.beginTransaction().replace(R.id.container, new EmployeeInformation()).commit();
         InputMethodManager imm = (InputMethodManager)this.getSystemService(Service.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-        Toast.makeText(this, "fragment commited", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "fragment commited", Toast.LENGTH_SHORT).show();
     }
 
 
     class SOAPRequestHandler {
         private static final int StaffInfoByName = 0;
         private static final int StaffInfoByPIN = 01;
-        private static final int GetAllPrograms = 02;
+        private static final int GetStaffByProgram = 02;
         //    private static final int StaffInfoByName=0;
 //    private static final int StaffInfoByName=0;
         private int MODE;
@@ -250,42 +272,22 @@ public class DrawerActivity extends AppCompatActivity
         private void getJsonObject() {
 
             soapRequest();
-            switch (MODE) {
-                case 0:
-                    staffInfoByName();
-                    break;
-                case 1:
-                    staffInfoByPin();
-                    break;
-                case 2:
-                    getAllPrograms();
-                    break;
-            }
-
-        }
-
-        private void staffInfoByPin() {
-
-        }
-
-        private void staffInfoByName() {
 
 
         }
 
-        private void getAllPrograms() {
 
-        }
 
         private void soapRequest() {
             SoapObject request = new SoapObject(params.get("NAMESPACE"), params.get("METHOD_NAME"));
             soapEnvelop = new SoapSerializationEnvelope(SoapEnvelope.VER12);
-            if (MODE != GetAllPrograms) {
-                if (MODE == StaffInfoByName) {
-                    request.addProperty("strStaffName", requestProperty.get("strStaffName"));
-                } else {
-                    request.addProperty("strStaffPIN", requestProperty.get("strStaffPIN"));
-                }
+
+            if (MODE == StaffInfoByName) {
+                request.addProperty("strStaffName", requestProperty.get("strStaffName"));
+            } else if(MODE== StaffInfoByPIN){
+                request.addProperty("strStaffPIN", requestProperty.get("strStaffPIN"));
+            }else {
+                request.addProperty("Program_ID", requestProperty.get("Program_ID"));
             }
             soapEnvelop.dotNet = true;
             soapEnvelop.setOutputSoapObject(request);
@@ -320,15 +322,15 @@ public class DrawerActivity extends AppCompatActivity
             staffInfoByPin.put("URL", URL);
 
 
-            SOAP_ACTION = "http://dss.brac.net/GetAllPrograms";
-            METHOD_NAME = "GetAllPrograms";
+            SOAP_ACTION = "http://dss.brac.net/GetStaffByAnyInfo";
+            METHOD_NAME = "GetStaffByAnyInfo";
             NAMESPACE = "http://dss.brac.net/";
             URL = "http://dss.brac.net/bracstandingdata/Service.asmx";
-            HashMap<String, String> getAllPrograms = new HashMap<>(4);
-            getAllPrograms.put("SOAP_ACTION", SOAP_ACTION);
-            getAllPrograms.put("METHOD_NAME", METHOD_NAME);
-            getAllPrograms.put("NAMESPACE", NAMESPACE);
-            getAllPrograms.put("URL", URL);
+            HashMap<String, String> getStaffByProgram = new HashMap<>(4);
+            getStaffByProgram.put("SOAP_ACTION", SOAP_ACTION);
+            getStaffByProgram.put("METHOD_NAME", METHOD_NAME);
+            getStaffByProgram.put("NAMESPACE", NAMESPACE);
+            getStaffByProgram.put("URL", URL);
 
 
             switch (MODE) {
@@ -337,7 +339,7 @@ public class DrawerActivity extends AppCompatActivity
                 case 1:
                     return staffInfoByPin;
                 case 2:
-                    return getAllPrograms;
+                    return getStaffByProgram;
             }
 
             return null;
@@ -371,7 +373,7 @@ public class DrawerActivity extends AppCompatActivity
             @Override
             protected void onPostExecute(String s) {
 
-                Toast.makeText(DrawerActivity.this, s, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(DrawerActivity.this, s, Toast.LENGTH_SHORT).show();
                 detail= new ArrayList<>();
                 try {
                     if (MODE != 2) {
@@ -389,6 +391,8 @@ public class DrawerActivity extends AppCompatActivity
 
             private void programs(String s) throws JSONException {
                 JSONArray jsonArray = new JSONArray(s);
+                detail=new ArrayList<>();
+                Log.i("TAG","programs() & array length "+jsonArray.length());
 //                detail.put("ProgramID")
                 String text = "";
                 HashMap<String,String> programDetail=new HashMap<String, String>();
@@ -397,9 +401,11 @@ public class DrawerActivity extends AppCompatActivity
                 for (int i = 0; i < jsonArray.length(); i++) {
                     JSONObject obj = (JSONObject) jsonArray.get(i);
                     programDetail=new HashMap<String, String>();
-                    String mname, mnameSpace = "";
 
-                    String info = obj.getString("ProgramID") + ". " + obj.getString("ProgramName");
+
+                    String info = obj.getString("StaffName") + " ("+obj.getString("DesignationID")
+                            +") of " + obj.getString
+                            ("ProjectName").toUpperCase();
 //                    response.add(info);
                     programDetail.put("Program",info);
                     detail.add(programDetail);
@@ -427,6 +433,7 @@ public class DrawerActivity extends AppCompatActivity
                     empInfo.put("Mobile",((mnameSpace=obj.getString("Mobile")).equals(""))?"N/A":
                             mnameSpace);
                     empInfo.put("Designation", obj.getString("Designation"));
+                    empInfo.put("Sex", obj.getString("Sex"));
                     detail.add(empInfo);
                 }
 //                setTextToTextview(text);
