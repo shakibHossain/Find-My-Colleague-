@@ -11,8 +11,8 @@ import butterknife.ButterKnife;
 public class DetailActivity extends AppCompatActivity {
     @Bind(R.id.content_detail_name)TextView name;
     @Bind(R.id.content_detail_phone)TextView mobile;
-    @Bind(R.id.content_detail_sex)TextView sex;
-    @Bind(R.id.content_detail_designation)TextView designation;
+    @Bind(R.id.content_detail_status)TextView status;
+    @Bind(R.id.content_detail_coords)TextView coords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +22,12 @@ public class DetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
         setTitle("FindMyColleague");
-        String data= getIntent().getStringExtra("name");
+        String data= getIntent().getStringExtra("Name");
 //        Bundle bundle= getIntent().getBundleExtra("bundle");
         name.setText(data);
         mobile.setText(getIntent().getStringExtra("mobile"));
-        designation.setText(getIntent().getStringExtra("designation"));
-        sex.setText(getIntent().getStringExtra("sex"));
+        status.setText(getIntent().getStringExtra("status"));
+        coords.setText(getIntent().getStringExtra("coordinates"));
 //        designation.setText(data.get("Designation").toString());
 //        sex.setText(data.get("Sex").toString());
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

@@ -24,41 +24,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="PIN:\t"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="34dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Designation:\t"
-        android:id="@+id/textView4"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="34dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Sex:\t"
-        android:id="@+id/textView5"
-        android:layout_below="@+id/textView4"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="34dp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Phone:\t"
         android:id="@+id/textView6"
-        android:layout_below="@+id/textView5"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="34dp" />
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/textView2"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -78,33 +48,6 @@
         android:id="@+id/content_detail_name"
         android:layout_alignTop="@+id/textView2"
         android:layout_toEndOf="@+id/textView6" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
-        android:id="@+id/content_detail_pin"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text=""
-        android:id="@+id/content_detail_designation"
-        android:layout_alignTop="@+id/textView4"
-        android:layout_toEndOf="@+id/textView4" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-
-        android:id="@+id/content_detail_sex"
-        android:layout_alignTop="@+id/textView5"
-        android:layout_toEndOf="@+id/textView5" />
 
     <TextView
         android:layout_width="match_parent"
@@ -137,17 +80,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nat ID:\t"
-        android:id="@+id/textView"
+        android:text="Last seen at:\t"
+        android:id="@+id/location"
+        android:layout_centerVertical="true"
         android:layout_below="@+id/textView7"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="32dp" />
+        android:layout_marginTop="34dp"
+        android:layout_alignParentStart="true"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/content_detail_natId"
-        android:layout_alignBottom="@+id/textView"
-        android:layout_toEndOf="@+id/textView7" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/content_detail_coords"
+        android:layout_alignParentEnd="true"
+        android:layout_alignBottom="@+id/location"
+        android:layout_toEndOf="@+id/location"/>
 
 </RelativeLayout>

@@ -39,8 +39,8 @@ public class Registration extends AppCompatActivity {
     private EditText userName;
     private EditText password;
     private EditText confirmPassword;
-    public static String BASE_URL_ADD ="http://192.168.0.100/fmc/index2.php";
-    public static String BASE_URL_CHECK ="http://192.168.0.100/fmc/index.php";
+    public static String BASE_URL_ADD ="http://192.168.0.102/fmc/index2.php";
+    public static String BASE_URL_CHECK ="http://192.168.0.102/fmc/index.php";
     SharedPreferences prefs;
     SharedPreferences.Editor editor;
     AsyncHttpClient asyncHttpClient= new AsyncHttpClient();
@@ -148,7 +148,8 @@ public class Registration extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONArray response) {
 //                        super.onSuccess(statusCode, headers, response);
                 try {
-                    Log.i("TAG", "onSuccess() Array returned: " + response.toString(4));
+                    Log.i("TAG", "posting reg detail: onSuccess() Array returned: " + response
+                            .toString(4));
 //                    Toast.makeText(Registration.this, "onSuccess() Array returned: " + response.toString(4),
 //                            Toast.LENGTH_SHORT).show();
                     registrationSuccessful=true;
@@ -161,7 +162,7 @@ public class Registration extends AppCompatActivity {
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
 //                        super.onSuccess(statusCode, headers, response);
                 try {
-                    Log.i("TAG","onSuccess() Array returned: " + response.toString(4));
+                    Log.i("TAG","posting reg detail: onSuccess() object returned: " + response.toString(4));
 //                    Toast.makeText(Registration.this, "onSuccess() Array returned: " + response.toString(4),
 //                            Toast.LENGTH_SHORT).show();
 
@@ -182,11 +183,12 @@ public class Registration extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                super.onFinish();
-                dialog.dismiss();
+
                 if(registrationSuccessful){
                     register();
                 }
+                super.onFinish();
+                dialog.dismiss();
             }
         });
 
@@ -218,10 +220,6 @@ public class Registration extends AppCompatActivity {
                             Toast
                             .LENGTH_SHORT)
                             .show();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                try {
                     Log.i("TAG","exists: "+response.getString("exists"));
                     result[0] = (response.getString("exists")).equals("true");
                 } catch (JSONException e) {
@@ -233,6 +231,7 @@ public class Registration extends AppCompatActivity {
             @Override
             public void onFinish() {
                 super.onFinish();
+
                 dialog.dismiss();
             }
         });
@@ -242,23 +241,16 @@ public class Registration extends AppCompatActivity {
 
 
     public void register() {
-
+        Log.i("TAG","register()");
 
         editor.putString(getString(R.string.pref_loggedIn_username), userName.getText().toString());
         editor.putString(getString(R.string.pref_loggedIn_name), name.getText().toString());
         editor.putString(getString(R.string.pref_loggedIn_password),password.getText().toString());
         editor.commit();
-//        TextView drawerHeader=((TextView) findViewById(R.id.nav_head_text));
-//        Log.i("TAG",(drawerHeader==null)+"= drawerheader");
-//        drawerHeader.setText(name.getText()
-//                .toString());
-
-//        Log.i("TAG", prefs.getString(getString(R.string.pref_user_pin), null) + "-" + name.getText()
-//                .toString());
+        Log.i("TAG", "Logging in as :" + prefs.getString(getString(R.string.pref_loggedIn_name),
+                "No Name stored") + " (" + prefs.getString(getString(R.string.pref_loggedIn_name),
+                "username not available") + ")");
         Intent i = new Intent(Registration.this, DrawerActivity.class);
-        Log.i("TAG","Logging in as :"+prefs.getString(getString(R.string.pref_loggedIn_name),
-                "No Name stored")+" ("+prefs.getString(getString(R.string.pref_loggedIn_name),
-                "username not available")+")");
         startActivity(i);
 
         //  (new saveInDatabase(this)).execute(userName.getText().toString(),password.getText().toString(),"Inactive","0.000","0.000");

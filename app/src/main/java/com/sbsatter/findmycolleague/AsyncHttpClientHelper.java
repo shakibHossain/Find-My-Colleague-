@@ -22,8 +22,10 @@ import cz.msebera.android.httpclient.Header;
  */
 public class AsyncHttpClientHelper {
 
+
     AsyncHttpClient asyncHttpClient;
-    public static String BASE_URL ="http://192.168.0.100/fmc/";
+    public static String BASE_URL ="http://192.168.0.102/fmc/";
+    public static final String BASE_URL_SEARCHNAME =BASE_URL+"search.php";
     public static String BASE_URL_STATUS = BASE_URL + "status.php";
     public static String BASE_URL_ADD =BASE_URL+"index2.php";
     public static String BASE_URL_CHECK =BASE_URL+"index.php";
